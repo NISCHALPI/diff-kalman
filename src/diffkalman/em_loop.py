@@ -103,12 +103,15 @@ def em_updates(
             # Update the parameters
             (-complete_log_likelihood).backward()
             optimizer.step()
-            lr_scheduler.step()
+            
 
             # Print the log likelihood
             print(
                 f"Epoch {e + 1}/{num_epochs} Cycle {c + 1}/{num_cycles} Log Likelihood: {marginal_likelihood.item()}"
             )
+        
+        # Update the learning rate
+        lr_scheduler.step()
 
     return {
         "likelihoods": likelihoods,
